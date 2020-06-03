@@ -1,38 +1,78 @@
-// You should NOT change the HTML or CSS in this project (at least until you reach
-// the bonus objectives). Focus on the JavaScript.
 
 const findInput = document.querySelector(".find-input")
 const replaceInput = document.querySelector(".replace-input")
 const replaceAllButton = document.querySelector(".replace-all-button")
+const replaceButton = document.querySelector(".replace-button")
+let cellElements = []
 
-// The following variable holds your OUTER ARRAY of row elements.
-// Later you will need an OUTER LOOP to loop over the individual elements within
-// this array.
 const rowElements = document.querySelectorAll(".row")
 
-// When you call the function belwo, it will get and return an INNER ARRAY
-// containing the cell elements for a given row.
-// Call this function from WITHIN your row elements loop. Then you will, in turn,
-// need to loop over the resulting cell elements. But where should this whole
-// NESTED LOOP go? Think through the user's experience: when should WHAT happen? 
 function getCellElements (currentRowElement) {
     return currentRowElement.querySelectorAll(".cell")
 }
 
+function displayWords (wordCount) {
+    let newElement = document.createElement('p')
+    newElement.innerHTML = 'Words Found ' + wordCount
+    document.body.prepend(newElement)
+}
 
-// YOUR CODE GOES HERE
+replaceAllButton.addEventListener('click', function() { 
+     let enteredInput = findInput.value
+     let replaceText = replaceInput.value   
+     let foundWordsAll = 0
+    
+    
+    for(let rowLoop = 0; rowLoop < rowElements.length;rowLoop += 1) {
+        cellElements = getCellElements(rowElements[rowLoop])
+        console.log(cellElements);
+        
+        for(let elementLoop = 0; elementLoop < cellElements.length; elementLoop += 1) {
+           console.log(cellElements[elementLoop].innerText);
+           
+           if (cellElements[elementLoop].innerText.includes(enteredInput)) {
+               let stringed = cellElements[elementLoop].innerHTML
+               let replaced = stringed.replace(enteredInput, replaceText)
+               cellElements[elementLoop].innerHTML = replaced
+               foundWordsAll++
+               console.log(foundWordsAll)
+           }
 
+           
+           
 
-// One last thing: dedicate very careful attention to using variables and
-// naming them accurately.
-// And when you change the value you are assigning to a variable, don't
-// forget to consider changing the name to reflect the change you made! It
-// is very easy to get confused when you are working inside NESTED LOOPS.
-// The best of us do. And unnecessary confusion during the process of 
-// developing your code means wasted time.
-//
-// The time-cost of structuring and naming things well is FAR less than the
-// time-cost of ignoring the quality and readability of your code.
-//
-// You can, of course, remove any comments in this starter project once
-// you have read them, if you prefer.
+    }
+}
+            displayWords(foundWordsAll) 
+})
+replaceButton.addEventListener('click', function() { 
+    let enteredInput = findInput.value
+    let replaceText = replaceInput.value   
+    let foundWordsOne = 0
+   
+   for(let rowLoop = 0; rowLoop < rowElements.length;rowLoop += 1) {
+       cellElements = getCellElements(rowElements[rowLoop])
+       console.log(cellElements);
+       
+       for(let elementLoop = 0; elementLoop < cellElements.length; elementLoop += 1) {
+          console.log(cellElements[elementLoop].innerText);
+          
+          if (cellElements[elementLoop].innerText.includes(enteredInput)) {
+              let stringed = cellElements[elementLoop].innerHTML
+              let replaced = stringed.replace(enteredInput, replaceText)
+              cellElements[elementLoop].innerHTML = replaced
+              foundWordsOne++
+              console.log(foundWordsOne)
+              displayWords(foundWordsOne)
+              return
+          }
+          
+           // if(cellElements.includes(enteredInput)) {
+           //     alert('string found')
+           // }
+
+   }
+}
+             
+})
+
