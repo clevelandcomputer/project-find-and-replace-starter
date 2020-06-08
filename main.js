@@ -13,8 +13,10 @@ function getCellElements (currentRowElement) {
 
 function displayWords (wordCount) {
     let newElement = document.createElement('p')
-    newElement.innerHTML = 'Words Found ' + wordCount
+    newElement.innerHTML = "\"" + findInput.value + "\"" + ' was replaced with ' + "\"" + replaceInput.value + "\"" + ' ' + wordCount + ' times'
     document.body.prepend(newElement)
+    foundWordsAll = 0
+    foundWordsOne = 0
 }
 
 replaceAllButton.addEventListener('click', function() { 
@@ -31,12 +33,14 @@ replaceAllButton.addEventListener('click', function() {
            console.log(cellElements[elementLoop].innerText);
            
            if (cellElements[elementLoop].innerText.includes(enteredInput)) {
+               let word = new RegExp(enteredInput, "ig")
                let stringed = cellElements[elementLoop].innerHTML
-               let replaced = stringed.replace(enteredInput, replaceText)
+               let replaced = stringed.replace(word, replaceText)
                cellElements[elementLoop].innerHTML = replaced
                foundWordsAll++
                console.log(foundWordsAll)
            }
+   
 
            
            
