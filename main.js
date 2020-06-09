@@ -17,13 +17,20 @@ function displayWords (wordCount) {
     document.body.prepend(newElement)
     foundWordsAll = 0
     foundWordsOne = 0
+    
 }
+
+// console.log(localStorage.getItem('fresh'));
+// console.log(JSON.parse(localStorage.getItem('fresh')));
+
+
+
 
 replaceAllButton.addEventListener('click', function() { 
      let enteredInput = findInput.value
      let replaceText = replaceInput.value   
      let foundWordsAll = 0
-    
+     let data = []
     
     for(let rowLoop = 0; rowLoop < rowElements.length;rowLoop += 1) {
         cellElements = getCellElements(rowElements[rowLoop])
@@ -37,17 +44,27 @@ replaceAllButton.addEventListener('click', function() {
                let stringed = cellElements[elementLoop].innerHTML
                let replaced = stringed.replace(word, replaceText)
                cellElements[elementLoop].innerHTML = replaced
+               
+              
+               
+               
+               
+               
                foundWordsAll++
                console.log(foundWordsAll)
            }
    
-
+           
            
            
 
     }
 }
             displayWords(foundWordsAll) 
+            //     data = [{Search: enteredInput, Replace: replaceText}];
+            //    let oldData = JSON.parse(localStorage.getItem('fresh'));
+            //    oldData += data.push({Search: enteredInput, Replace: replaceText})
+            //    localStorage.setItem("fresh", JSON.stringify(oldData));
 })
 replaceButton.addEventListener('click', function() { 
     let enteredInput = findInput.value
